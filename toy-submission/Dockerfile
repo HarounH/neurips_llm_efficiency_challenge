@@ -21,9 +21,17 @@ RUN pip install -r requirements.txt huggingface_hub sentencepiece
 RUN python scripts/download.py --repo_id openlm-research/open_llama_3b
 RUN python scripts/convert_hf_checkpoint.py --checkpoint_dir checkpoints/openlm-research/open_llama_3b
 
+# Add --token <your-token> to next line
+RUN python scripts/download.py --repo_id meta-llama/Llama-2-7b-chat-hf --token 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
+RUN python scripts/convert_hf_checkpoint.py --checkpoint_dir checkpoints/meta-llama/Llama-2-7b-chat-hf
+
+# Add --token <your-token> to next line
+RUN python scripts/download.py --repo_id meta-llama/Llama-2-7b-hf --token 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
+RUN python scripts/convert_hf_checkpoint.py --checkpoint_dir checkpoints/meta-llama/Llama-2-7b-hf
+
 # Copy over single file server
-COPY ./main.py /submission/main.py
+COPY ./lit_gpt_main.py /submission/lit_gpt_main.py
 COPY ./helper.py /submission/helper.py
 COPY ./api.py /submission/api.py
 # Run the server
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "lit_gpt_main:app", "--host", "0.0.0.0", "--port", "80"]
