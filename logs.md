@@ -4,9 +4,19 @@ docker run --gpus all -p 8080:80 toy_submission
 
 curl -X POST -H "Content-Type: application/json" -d '{"prompt": "The capital of france is "}' http://localhost:8080/process
 ```
+# 2023/08/05
+1. hugginface llama2...
+2. `docker build -t toy_submission .` but now with llama2 model download
+3. run service: `docker run --gpus all -p 8080:80 toy_submission` and notice that llama2 is loaded.
+4. try a command: `curl -X POST -H "Content-Type: application/json" -d '{"prompt": "The capital of france is "}' http://localhost:8080/process`
+
 
 # 2023/08/04
 Aim: use LLaMa-2-chat model for inference
+1. add llama submodule, run download for 7b models
+2. edit llama/.gitignore - gitignore from parent directory is weird.
+3. Note that huggingface serves llama2 checkpoints - applied for that too.
+4. However, I think that requires downloading llama2 again... which takes time, so TODO
 
 # 2023/08/03
 1. install docker
