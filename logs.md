@@ -5,9 +5,21 @@ docker run --gpus all -p 8080:80 toy_submission
 curl -X POST -H "Content-Type: application/json" -d '{"prompt": "The capital of france is "}' http://localhost:8080/process
 ```
 
+# 2023/08/08
+1. Had to re-run evals, many were still failing. Basically stripped out a lot of scenarios and made `run_specs_stem_minor.conf`
+2. Running eval overnight.
+3. seems [average prompt length is ~500](https://discord.com/channels/1124130156336922665/1129094438992490597/1131333642715660358)
+4. finetuning architecture is starting to tend towards some form of LoRA, mentally, as a baseline
+5. data is still unknown
+6. have to inspect errors being made still.
+
+
 # 2023/08/06
 1. Aim to have a more thorough baseline using larger run spec
+    - took the lite one suggested by repo and stripped away from stuff
+
 2. Start understanding the different tasks and improving the ones you care about
+3. had to reinstall numpy...
 
 # 2023/08/05
 1. hugginface llama2...
@@ -18,7 +30,8 @@ curl -X POST -H "Content-Type: application/json" -d '{"prompt": "The capital of 
 **For eval**
 1. make sure to install helm neurips client - it registers a neurips model locally which is compatible with toy submission.
 2. Start the docker service using docker run in the background.
-3. Kick off helm command like: `helm-run --conf-paths run_specs.conf --suite v1 --max-eval-instances 1000`
+3. Kick off helm command like: `helm-run --conf-paths run_specs_stem.conf --suite v1 --max-eval-instances 1000`
+
 # 2023/08/04
 Aim: use LLaMa-2-chat model for inference
 1. add llama submodule, run download for 7b models
